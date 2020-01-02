@@ -10,7 +10,6 @@ const cheerio = require('cheerio')
 
 const wikimediaCommonsUrl = /^https?:\/\/commons.wikimedia.org/
 
-
 /**
  * Given a wikimedia commons URL, returns an object describing the license in
  * a structured format.
@@ -77,6 +76,12 @@ async function parseLicense (url) {
 }
 
 const server = polka()
+  .get('/', (_, res) => {
+    res.writeHead(301, {
+      Location: 'https://github.com/q-wiki/wikimedia-commons-license-api'
+    })
+    res.end('See https://github.com/q-wiki/wikimedia-commons-license-api for more information.')
+  })
   .get('/license', async (req, res) => {
     try {
       const parsed = await parseLicense(req.query.commonsUrl)

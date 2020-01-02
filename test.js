@@ -174,7 +174,7 @@ test('Parses files in the public domain in Germany', async t => {
     },
     source: {
       href: 'http://www.ngw.nl/int/dld/n/niederseelbach.htm',
-      label: 'http://www.ngw.nl/int/dld/n/niederseelbach.htm',
+      label: 'http://www.ngw.nl/int/dld/n/niederseelbach.htm'
     },
     license: {
       href: null,
