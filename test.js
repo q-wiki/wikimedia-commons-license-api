@@ -75,6 +75,25 @@ test('Parses CC-BY-SA 2.5', async t => {
   }, license)
 })
 
+test('Parses CC-BY 3.0', async t => {
+  const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Warszawskie,_Krak%C3%B3w,_Poland_-_panoramio_(127).jpg')
+  t.deepEqual({
+    date: '2014-04-04',
+    author: {
+      href: 'https://web.archive.org/web/20161028173306/http://www.panoramio.com/user/668831?with_photo_id=105250627',
+      label: 'marek7400'
+    },
+    source: {
+      href: 'https://web.archive.org/web/20161028173304/http://www.panoramio.com/photo/105250627',
+      label: 'https://web.archive.org/web/20161028173304/http://www.panoramio.com/photo/105250627'
+    },
+    license: {
+      href: 'https://creativecommons.org/licenses/by/3.0/deed.en',
+      label: 'CC BY 3.0'
+    }
+  }, license)
+})
+
 test('Parses CC-BY-SA 4.0', async t => {
   const license = await parseLicense('https://commons.wikimedia.org/wiki/File:%D0%A7%D0%B0%D1%81%D0%BE%D0%B2%D0%BD%D1%8F_%D0%BD%D0%B0%D0%B4_%D0%BC%D0%BE%D0%B3%D0%B8%D0%BB%D0%BE%D0%B9_%D0%BF%D0%B5%D0%B2%D0%B8%D1%86%D1%8B_%D0%90%D0%BD%D0%B0%D1%81%D1%82%D0%B0%D1%81%D0%B8%D0%B8_%D0%92%D1%8F%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%BE%D0%B9.jpg')
   t.deepEqual({
@@ -137,6 +156,25 @@ test('Parses files in the public domain, case #2', async t => {
     source: {
       href: 'https://www.dvidshub.net/image/1405691/sparta-week-2014',
       label: 'https://www.dvidshub.net/image/1405691/sparta-week-2014'
+    },
+    license: {
+      href: null,
+      label: 'Public domain'
+    }
+  }, license)
+})
+
+test('Parses files in the public domain in Germany', async t => {
+  const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Wappen_Niederseelbach.png')
+  t.deepEqual({
+    date: '1974-03-08',
+    author: {
+      label: 'Heinz Ritt',
+      href: 'https://www.wikidata.org/wiki/Q1600820'
+    },
+    source: {
+      href: 'http://www.ngw.nl/int/dld/n/niederseelbach.htm',
+      label: 'http://www.ngw.nl/int/dld/n/niederseelbach.htm',
     },
     license: {
       href: null,
