@@ -57,20 +57,20 @@ async function parseLicense (url) {
   const sourceNode = $('#fileinfotpl_src + td')
   const source = extractFromNode(sourceNode)
 
-  const date = $('#fileinfotpl_date + td time').attr('datetime')
+  const date = $('#fileinfotpl_date + td time').attr('datetime') || null
 
   // TODO: #fileinfotpl_perm
   let license = null
-  const permNode = $('#fileinfotpl_perm')
-  if (permNode.length) {
-    throw new Error('Permissions via #fileinfotpl_perm not implemented!')
-  } else {
-    const englishLicense = href => href.replace(/\/deed.(\w+)$/, '') + '/deed.en'
+  const licenseTplNode = $('.licensetpl')
+  if (licenseTplNode.length) {
+    const englishLicense = href => href ? href.replace(/\/deed.(\w+)$/, '') + '/deed.en' : null
 
     license = {
       href: englishLicense($('.licensetpl_link').text().trim()),
       label: $('.licensetpl_short').text().trim()
     }
+  } else {
+    throw new Error('No .licensetpl found! This is not supported at the moment.')
   }
 
   return { source, author, date, license }

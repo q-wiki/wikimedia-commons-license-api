@@ -106,3 +106,41 @@ test('Converts relative to absolute URLs', async t => {
   const license = await parseLicense('https://commons.wikimedia.org/wiki/File:%D0%A7%D0%B0%D1%81%D0%BE%D0%B2%D0%BD%D1%8F_%D0%BD%D0%B0%D0%B4_%D0%BC%D0%BE%D0%B3%D0%B8%D0%BB%D0%BE%D0%B9_%D0%BF%D0%B5%D0%B2%D0%B8%D1%86%D1%8B_%D0%90%D0%BD%D0%B0%D1%81%D1%82%D0%B0%D1%81%D0%B8%D0%B8_%D0%92%D1%8F%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%BE%D0%B9.jpg')
   t.true(/^https?:\/\//.test(license.author.href))
 })
+
+test('Parses files in the public domain, case #1', async t => {
+  const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Gesammelte_Werke_(Thoma)_1_071.jpg')
+  t.deepEqual({
+    date: null,
+    author: {
+      href: 'https://en.wikisource.org/wiki/de:Ludwig_Thoma',
+      label: 'Ludwig Thoma'
+    },
+    source: {
+      href: 'https://books.google.com/books?id=E9pLAAAAMAAJ',
+      label: 'Google Books-USA'
+    },
+    license: {
+      href: null,
+      label: 'Public domain'
+    }
+  }, license)
+})
+
+test('Parses files in the public domain, case #2', async t => {
+  const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Sparta_Week_2014_140617-A-ZD229-731.jpg')
+  t.deepEqual({
+    date: '2014-06-17',
+    author: {
+      href: null,
+      label: 'Sgt. Eric-James Estrada'
+    },
+    source: {
+      href: 'https://www.dvidshub.net/image/1405691/sparta-week-2014',
+      label: 'https://www.dvidshub.net/image/1405691/sparta-week-2014'
+    },
+    license: {
+      href: null,
+      label: 'Public domain'
+    }
+  }, license)
+})
