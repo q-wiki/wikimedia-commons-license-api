@@ -19,5 +19,5 @@ $ npx ava --watch
 There is one API endpoint:
 
 ```
-http://localhost:3000/license?commonsUrl=https://commons.wikimedia.org/wiki/File:...
+http://localhost:3000/license?url=https://commons.wikimedia.org/wiki/File:...
 ```

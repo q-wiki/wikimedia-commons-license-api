@@ -84,7 +84,7 @@ const server = polka()
   })
   .get('/license', async (req, res) => {
     try {
-      const parsed = await parseLicense(req.query.commonsUrl)
+      const parsed = await parseLicense(req.query.url)
       res.writeHead(200, {
         'Content-Type': 'application/json; charset=UTF-8'
       })
