@@ -94,6 +94,14 @@ test('Parses CC-BY-SA 4.0', async t => {
   }, license)
 })
 
+test('Parses authors with multiple links', async t => {
+  const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Puesta_de_sol,_Tok,_Alaska,_Estados_Unidos,_2017-08-28,_DD_189-191_HDR.jpg')
+  t.deepEqual({
+    href: 'https://www.wikidata.org/wiki/Q28147777',
+    label: 'Diego Delso'
+  }, license.author)
+})
+
 test('Converts relative to absolute URLs', async t => {
   const license = await parseLicense('https://commons.wikimedia.org/wiki/File:%D0%A7%D0%B0%D1%81%D0%BE%D0%B2%D0%BD%D1%8F_%D0%BD%D0%B0%D0%B4_%D0%BC%D0%BE%D0%B3%D0%B8%D0%BB%D0%BE%D0%B9_%D0%BF%D0%B5%D0%B2%D0%B8%D1%86%D1%8B_%D0%90%D0%BD%D0%B0%D1%81%D1%82%D0%B0%D1%81%D0%B8%D0%B8_%D0%92%D1%8F%D0%BB%D1%8C%D1%86%D0%B5%D0%B2%D0%BE%D0%B9.jpg')
   t.true(/^https?:\/\//.test(license.author.href))

@@ -38,8 +38,8 @@ async function parseLicense (url) {
     const link = node.find('a')
     if (link.length) {
       return {
-        label: removeEmpty(link.text().trim()),
-        href: removeEmpty(absoluteUrl(link.attr('href')))
+        label: removeEmpty(link.first().text().trim()),
+        href: removeEmpty(absoluteUrl(link.first().attr('href')))
       }
     } else {
       return {
