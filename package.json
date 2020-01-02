@@ -1,15 +1,15 @@
 {
-  "name": "license-from-url",
+  "name": "wikimedia-commons-license-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "A RESTful API that returns information about the license of a file in the Wikimedia Commons",
   "main": "index.js",
   "scripts": {
     "test": "eslint *.js && ava",
     "dev": "nodemon index.js",
     "start": "node index.js"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Arne Schlüter <arne@schlueter.is>",
+  "license": "GPL",
   "devDependencies": {
     "ava": "^2.4.0",
     "eslint": "^6.8.0",
