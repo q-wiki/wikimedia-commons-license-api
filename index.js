@@ -77,13 +77,19 @@ async function parseLicense (url) {
 }
 
 const server = polka()
-  .get('/license/:commonsUrl', async (req, res) => {
-    const parsed = parseLicense(req.params.commonsUrl)
-
-    res.writeHead(200, {
-      'Content-Type': 'application/json'
-    })
-    res.end(JSON.stringify(parsed))
+  .get('/license', async (req, res) => {
+    try {
+      const parsed = await parseLicense(req.query.commonsUrl)
+      res.writeHead(200, {
+        'Content-Type': 'application/json; charset=UTF-8'
+      })
+      res.end(JSON.stringify(parsed))
+    } catch (e) {
+      res.writeHead(400, {
+        'Content-Type': 'text/plain; charset=UTF-8'
+      })
+      res.end('🔥 ' + e.message)
+    }
   })
 
 if (module.parent == null) {

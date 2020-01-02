@@ -15,3 +15,9 @@ $ npm test
 # Run tests and watch for file changes
 $ npx ava --watch
 ```
+
+There is one API endpoint:
+
+```
+http://localhost:3000/license?commonsUrl=https://commons.wikimedia.org/wiki/File:...
+```
