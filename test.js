@@ -10,6 +10,25 @@ test('Throws an error for non-commons-URLs', async t => {
   }
 })
 
+test('Parses CC0 1.0', async t => {
+  const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Fukuzawa_Yukichi_grave_-_Zenpukuji_-_Minato,_Tokyo_-_DSC06820.JPG')
+  t.deepEqual({
+    date: '2015-02-19 20:06:54',
+    author: {
+      href: 'https://commons.wikimedia.org/wiki/User:Daderot',
+      label: 'Daderot'
+    },
+    source: {
+      href: null,
+      label: 'Own work'
+    },
+    license: {
+      href: 'http://creativecommons.org/publicdomain/zero/1.0/deed.en',
+      label: 'CC0'
+    }
+  }, license)
+})
+
 test('Parses CC-BY 2.0', async t => {
   const license = await parseLicense('https://commons.wikimedia.org/wiki/File:Night_in_Shengping_Theater_entry_20120407a.jpg')
   t.deepEqual({
